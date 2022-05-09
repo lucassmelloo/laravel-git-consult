@@ -119,7 +119,9 @@ class ConsultController extends Controller
     }
 
     public function callUserPage(int $id)
-    {
-        return view();
+    {   
+        $user = UserModel::where('id',$id)->get();
+        return view('userPage')
+            ->with('user',$user[0]);
     }
 }

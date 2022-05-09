@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href="{{asset('css/app.css')}}">
     <link rel = "stylesheet" href="./layout.css">
-    <title>{{$title}}</title>
+    <title>git.Consult</title>
 </head>
 <body style = "
     background: rgb(255,200,0);

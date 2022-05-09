@@ -93,7 +93,6 @@ class ConsultController extends Controller
         $client = new Client(['verify' => false]);
 
         $response = $client->request('GET', $url.$userConsult);
-
         if($response->getStatusCode() === 200){
             $responseJson = json_decode($response->getBody());
             $userVerified = new UserModel();
@@ -102,15 +101,25 @@ class ConsultController extends Controller
             $userVerified->avatar_url = $responseJson->{'avatar_url'};
             $userVerified->public_repos = $responseJson->{'public_repos'};
             $userVerified->followers = $responseJson->{'followers'};
-            $userVerified->following = $responseJson->{'following'};
+            $userVerified->followings = $responseJson->{'following'};
             $userVerified->timestamps = false;
             
             
             $userVerified->save();
-            
         }
         $users = UserModel::query()->get();
         return redirect('/');
         
+    }
+
+    public function deleteUser(int $id)
+    {
+        UserModel::where('id',$id)->delete();
+        return redirect('/');
+    }
+
+    public function callUserPage(int $id)
+    {
+        return view();
     }
 }

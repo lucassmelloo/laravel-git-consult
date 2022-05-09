@@ -18,10 +18,10 @@
                 </div>
             </div>
             followers: {{$user->followers}}<br>
-            following: {{$user->following}}
+            followings: {{$user->followings}}
             <div style="justify-content:center">
-                <a href= "/user/{{$user->login}}"><button class="btn btn-primary">Ver mais</button></a>
-                <button class="btn btn-danger ">Excluir</button>
+                <a href= "/user/{{$user->id}}"><button class="btn btn-primary ">Ver mais</button></a>
+                <a href= "/delete/{{$user->id}}"><button class="btn btn-danger">Excluir</button></a>
             </div>
             </li>
         @endforeach

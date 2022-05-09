@@ -16,5 +16,10 @@ class UserModel extends Model
     public int $followers;
     public int $following; */
 
+    /* private function deleteUser(string $login)
+    {
+        $user = 
+    } */
+
     
 }

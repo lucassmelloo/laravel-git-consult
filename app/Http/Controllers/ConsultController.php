@@ -101,7 +101,7 @@ class ConsultController extends Controller
             $userVerified->avatar_url = $responseJson->{'avatar_url'};
             $userVerified->public_repos = $responseJson->{'public_repos'};
             $userVerified->followers = $responseJson->{'followers'};
-            $userVerified->followings = $responseJson->{'following'};
+            $userVerified->following = $responseJson->{'following'};
             $userVerified->timestamps = false;
             
             

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserModel;
+use Throwable;
 use GuzzleHttp\Client;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
-
-use function PHPSTORM_META\map;
 
 class ConsultController extends Controller
 {   
@@ -91,9 +89,8 @@ class ConsultController extends Controller
         $userConsult = $request->input('user');
         $url = "https://api.github.com/users/" ;
         $client = new Client(['verify' => false]);
-
-        $response = $client->request('GET', $url.$userConsult);
-        if($response->getStatusCode() === 200){
+        try{
+            $response = $client->request('GET', $url.$userConsult);
             $responseJson = json_decode($response->getBody());
             $userVerified = new UserModel();
             $userVerified->name = $responseJson->{'name'};
@@ -103,12 +100,13 @@ class ConsultController extends Controller
             $userVerified->followers = $responseJson->{'followers'};
             $userVerified->following = $responseJson->{'following'};
             $userVerified->timestamps = false;
-            
-            
             $userVerified->save();
+        }catch( Throwable $e ){
+            return redirect('/');
         }
+
         $users = UserModel::query()->get();
-        return redirect('/');
+        return redirect('/');;
         
     }
 

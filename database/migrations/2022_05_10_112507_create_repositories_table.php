@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateRepositoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_models', function (Blueprint $table) {
+        Schema::create('repositories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('login');
-            $table->string('avatar_url');
-            $table->integer('public_repos');
-            $table->integer('following');
-            $table->integer('followers');
+            $table->string('watchers_count');
+            $table->string('language')->nullable(true);
+            $table->int('watchers');
+            $table->string('description')->nullable(true);
+            $table->foreign('repo_user_id');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('repositories');
     }
 }

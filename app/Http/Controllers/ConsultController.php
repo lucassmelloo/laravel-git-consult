@@ -90,25 +90,17 @@ class ConsultController extends Controller
         $url = "https://api.github.com/users/" ;
         $client = new Client(['verify' => false]);
         try{
-            /*COMO FAZER COM UserModel::create()?*/
             $response = $client->request('GET', $url.$userConsult);
-            $responseJson = json_decode($response->getBody());
-            
-            /* UserModel::create($responseJson->only(['name','login','avatar_url','public_repos','followers','following'])); */
+            $responseJson = (array) json_decode($response->getBody());
             $userVerified = new UserModel();
-            $userVerified->name = $responseJson->{'name'};
-            $userVerified->login = $responseJson->{'login'};
-            $userVerified->avatar_url = $responseJson->{'avatar_url'};
-            $userVerified->public_repos = $responseJson->{'public_repos'};
-            $userVerified->followers = $responseJson->{'followers'};
-            $userVerified->following = $responseJson->{'following'};
-            $userVerified->timestamps = false;
+            $userVerified->fill($responseJson);
             $userVerified->save();
+
+            return redirect('/');
         }catch( Throwable $e ){
             return redirect('/');
         }
 
-        $users = UserModel::query()->get();
         return redirect('/');;
         
     }

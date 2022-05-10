@@ -9,9 +9,10 @@ class UserModel extends Model
 {
     use HasFactory;
 
-    /* protected $fillable = [];
-    protected $timespamps = false;
- */
+    public $timestamps = false;
+
+    protected $fillable = ['name', 'login','avatar_url','public_repos','followers','following'];
+
     /* public string $name;
     public string $login;
     public string $avatar_url;

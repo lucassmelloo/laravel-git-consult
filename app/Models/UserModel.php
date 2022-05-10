@@ -9,6 +9,9 @@ class UserModel extends Model
 {
     use HasFactory;
 
+    /* protected $fillable = [];
+    protected $timespamps = false;
+ */
     /* public string $name;
     public string $login;
     public string $avatar_url;

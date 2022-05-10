@@ -3,8 +3,10 @@
 use App\Http\Controllers\ConsultController;
 use Illuminate\Support\Facades\Route;
 
+Route::controller(ConsultController::class)->group(function(){
 
-Route::get('/', [ConsultController::class, 'index']);
-Route::get('/delete/{id}', [ConsultController::class, 'deleteUser']);
-Route::get('/user/{login}',[ConsultController::class, 'callUserPage']);
-Route::post('/salvar', [ConsultController::class, 'store']);
+    Route::get('/', 'index');
+    Route::get('/delete/{id}', 'deleteUser');
+    Route::get('/user/{login}', 'callUserPage');
+    Route::post('/salvar', 'store');
+});
